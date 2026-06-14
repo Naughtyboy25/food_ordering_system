@@ -1,0 +1,163 @@
+.orders-shell {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  min-height: 50vh;
+}
+
+.page-card {
+  background: #252523;
+  border: 1px solid #333330;
+  border-radius: 18px;
+  padding: 2.5rem;
+  text-align: center;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.page-eyebrow {
+  display: inline-block;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #F5A623;
+  margin-bottom: 0.8rem;
+}
+
+.page-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  font-weight: 700;
+  color: #FAF7F2;
+  margin: 0 0 0.6rem;
+  letter-spacing: -0.02em;
+}
+
+.page-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  color: #7A7874;
+  margin: 0 0 1.8rem;
+  line-height: 1.6;
+}
+
+.page-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #F5A623;
+  color: #1C1C1E;
+  border: none;
+  border-radius: 12px;
+  padding: 0.7rem 1.4rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.15s, transform 0.15s;
+}
+
+.page-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+
+/* ── Orders Content ───────────────────────────── */
+.orders-content {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.orders-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.order-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.order-card {
+  background: #252523;
+  border: 1px solid #333330;
+  border-radius: 16px;
+  padding: 1.2rem 1.4rem;
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.order-id {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #FAF7F2;
+  margin: 0;
+}
+
+.order-date {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  color: #7A7874;
+}
+
+.order-items {
+  list-style: none;
+  margin: 0 0 1rem;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.order-items li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: #B0ABA7;
+}
+
+.order-item-name small {
+  color: #7A7874;
+  font-size: 0.8rem;
+}
+
+.order-item-price {
+  color: #F5A623;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.order-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #333330;
+  padding-top: 0.8rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  color: #7A7874;
+}
+
+.order-total {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #F5A623;
+}
+
+/* ── Responsive ───────────────────────────────── */
+@media (max-width: 600px) {
+  .orders-shell { padding: 2.5rem 1.2rem; }
+  .order-header { flex-direction: column; align-items: flex-start; }
+  .order-items li { flex-direction: column; gap: 0.2rem; }
+}

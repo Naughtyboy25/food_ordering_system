@@ -1,0 +1,41 @@
+<section class="menu-shell">
+
+  <!-- Browse Categories -->
+  <div class="menu-header">
+    <span class="page-eyebrow">Browse Categories</span>
+    <h1 class="page-title">Our Menu</h1>
+    <p class="page-sub">Pick a category below to see what's available.</p>
+  </div>
+
+  <app-category-list></app-category-list>
+
+  <!-- Menu Items -->
+  <div class="items-section">
+    <div class="items-header">
+      <h2 *ngIf="category(); else allItemsTitle">{{ category() }}</h2>
+      <ng-template #allItemsTitle>
+        <h2>All Items</h2>
+      </ng-template>
+      <p class="items-count">{{ items().length }} item{{ items().length === 1 ? '' : 's' }} available</p>
+    </div>
+
+    <div *ngIf="items().length > 0" class="item-grid">
+      <div class="item-card" *ngFor="let item of items()">
+        <div class="item-info">
+          <h3 class="item-name">{{ item.name }}</h3>
+          <p class="item-desc">{{ item.description }}</p>
+        </div>
+        <div class="item-footer">
+          <span class="item-price">${{ item.price | number:'1.2-2' }}</span>
+          <button class="item-add" (click)="addToCart(item)">Add to Order</button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="items().length === 0" class="empty-items">
+      <p>No items available for this category yet.</p>
+      <a routerLink="/menu" class="page-btn">Show All Items</a>
+    </div>
+  </div>
+
+</section>

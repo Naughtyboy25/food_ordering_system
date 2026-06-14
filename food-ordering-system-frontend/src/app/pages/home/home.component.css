@@ -1,0 +1,141 @@
+/* ── Hero ─────────────────────────────────────── */
+.hero {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4rem 2rem 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.hero-eyebrow {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #F5A623;
+  margin: 0 0 1rem;
+}
+
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  font-weight: 700;
+  color: #FAF7F2;
+  line-height: 1.12;
+  margin: 0 0 1.2rem;
+  letter-spacing: -0.03em;
+}
+
+.hero-title em {
+  font-style: italic;
+  color: #F5A623;
+}
+
+.hero-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  color: #7A7874;
+  line-height: 1.65;
+  margin: 0 0 2rem;
+  max-width: 380px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn-primary,
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  border-radius: 12px;
+  padding: 0.75rem 1.8rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  transition: opacity 0.15s, transform 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.btn-primary {
+  background: #F5A623;
+  color: #1C1C1E;
+  border: none;
+}
+
+.btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+
+.btn-ghost {
+  background: transparent;
+  color: #FAF7F2;
+  border: 1px solid #3A3A38;
+  font-weight: 500;
+}
+
+.btn-ghost:hover { border-color: #FAF7F2; }
+
+/* ── Hero Visual ──────────────────────────────── */
+.hero-visual {
+  position: relative;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-blob {
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  background: radial-gradient(circle, rgba(245,166,35,0.12) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.float-card {
+  position: absolute;
+  background: #252523;
+  border: 1px solid #333330;
+  border-radius: 14px;
+  padding: 0.8rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 1.8rem;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+
+.float-card span {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #8A8480;
+  letter-spacing: 0.05em;
+}
+
+.fc-1 { top: 10%; left: 5%;  animation: float1 4s ease-in-out infinite; }
+.fc-2 { top: 5%;  right: 5%; animation: float2 4.5s ease-in-out infinite; }
+.fc-3 { bottom: 15%; left: 10%; animation: float3 3.8s ease-in-out infinite; }
+.fc-4 { bottom: 10%; right: 8%; animation: float4 4.2s ease-in-out infinite; }
+
+@keyframes float1 { 0%,100%{transform:translateY(0)}  50%{transform:translateY(-10px)} }
+@keyframes float2 { 0%,100%{transform:translateY(0)}  50%{transform:translateY(-8px)}  }
+@keyframes float3 { 0%,100%{transform:translateY(0)}  50%{transform:translateY(-12px)} }
+@keyframes float4 { 0%,100%{transform:translateY(0)}  50%{transform:translateY(-6px)}  }
+
+/* ── Responsive ───────────────────────────────── */
+@media (max-width: 768px) {
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 2.5rem 1.2rem 1rem;
+  }
+  .hero-visual { display: none; }
+}

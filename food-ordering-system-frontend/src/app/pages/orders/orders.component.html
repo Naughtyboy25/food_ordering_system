@@ -1,0 +1,38 @@
+<section class="page-shell orders-shell">
+
+  <!-- No Orders -->
+  <div *ngIf="cartService.orders().length === 0" class="page-card">
+    <span class="page-eyebrow">Your Orders</span>
+    <h1 class="page-title">No orders yet</h1>
+    <p class="page-sub">Once you place an order from the cart, it will appear here.</p>
+    <a routerLink="/menu" class="page-btn">Browse Menu</a>
+  </div>
+
+  <!-- Orders List -->
+  <div *ngIf="cartService.orders().length > 0" class="orders-content">
+    <div class="orders-header">
+      <span class="page-eyebrow">Your Orders</span>
+      <h1 class="page-title">Order History</h1>
+    </div>
+
+    <div class="order-list">
+      <div class="order-card" *ngFor="let order of cartService.orders()">
+        <div class="order-header">
+          <h3 class="order-id">Order #{{ order.id }}</h3>
+          <span class="order-date">{{ order.orderedAt | date:'medium' }}</span>
+        </div>
+        <ul class="order-items">
+          <li *ngFor="let item of order.items">
+            <span class="order-item-name">{{ item.name }} <small>x{{ item.quantity }}</small></span>
+            <span class="order-item-price">${{ item.price * item.quantity | number:'1.2-2' }}</span>
+          </li>
+        </ul>
+        <div class="order-total-row">
+          <span>Total</span>
+          <span class="order-total">${{ order.total | number:'1.2-2' }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>

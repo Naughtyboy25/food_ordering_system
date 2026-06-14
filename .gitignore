@@ -1,0 +1,48 @@
+# ── Operating System ─────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+
+# ── IDEs and Editors ─────────────────────────────────────────────────────────
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+.project
+.classpath
+.settings/
+
+# ── Logs ─────────────────────────────────────────────────────────────────────
+*.log
+logs/
+
+# ── Environment and Secrets ──────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+application.properties
+application-*.properties
+!.properties.example
+
+# ── Java / Maven Backend ─────────────────────────────────────────────────────
+food-ordering-system-backend/target/
+food-ordering-system-backend/*.jar
+food-ordering-system-backend/*.war
+food-ordering-system-backend/dependency-reduced-pom.xml
+
+# ── Angular / Node Frontend ──────────────────────────────────────────────────
+food-ordering-system-frontend/node_modules/
+food-ordering-system-frontend/dist/
+food-ordering-system-frontend/.angular/
+food-ordering-system-frontend/.sass-cache/
+food-ordering-system-frontend/coverage/
+food-ordering-system-frontend/.eslintcache
+
+# ── Bun ──────────────────────────────────────────────────────────────────────
+*.lockb
+
+# ── Temporary Files ──────────────────────────────────────────────────────────
+*.tmp
+*.swp
+*.swo
+*~

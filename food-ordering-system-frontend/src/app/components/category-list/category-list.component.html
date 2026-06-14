@@ -1,0 +1,62 @@
+<!-- Category List View -->
+<section class="categories-section">
+
+  <!-- Section Header -->
+  <div class="section-header">
+    <span class="eyebrow">What are you craving?</span>
+    <h2 class="section-title">Browse Categories</h2>
+    <p class="section-sub">Select a category to explore our full menu.</p>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="state-container">
+    <div class="spinner-wrap">
+      <div class="spinner"></div>
+      <p class="state-text">Loading menu categories…</p>
+    </div>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="!isLoading && errorMessage" class="state-container error-state">
+    <div class="error-icon">⚠️</div>
+    <p class="state-text">{{ errorMessage }}</p>
+    <p class="error-hint">Check that your Spring Boot app is running: <code>localhost:8085</code></p>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="!isLoading && !errorMessage && categories.length === 0" class="state-container">
+    <div class="empty-icon">🍽️</div>
+    <p class="state-text">No categories found. Add some data to your database.</p>
+  </div>
+
+  <!-- Category Grid -->
+  <div *ngIf="!isLoading && !errorMessage && categories.length > 0" class="category-grid">
+    <div
+      class="category-card"
+      *ngFor="let cat of categories; let i = index"
+      [style.--accent]="getMeta(cat.name).color"
+      [style.animation-delay]="(i * 80) + 'ms'"
+      (click)="onCardClick(cat)"
+      (keydown.enter)="onCardClick(cat)"
+      tabindex="0"
+      role="button"
+    >
+      <div class="card-glow"></div>
+      <div class="card-icon">{{ getMeta(cat.name).icon }}</div>
+      <div class="card-body">
+        <span class="card-id">No. {{ cat.id }}</span>
+        <h3 class="card-name">{{ cat.name }}</h3>
+        <p class="card-desc">{{ getMeta(cat.name).description }}</p>
+      </div>
+      <button class="card-cta" (click)="onExplore(cat, $event)">Explore →</button>
+    </div>
+  </div>
+
+  <!-- API Badge -->
+  <div *ngIf="!isLoading && !errorMessage && categories.length > 0" class="api-badge">
+    <span class="badge-dot"></span>
+    {{ categories.length }} categories loaded from
+    <code>GET /api/category</code>
+  </div>
+
+</section>

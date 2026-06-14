@@ -1,0 +1,48 @@
+<section class="page-shell cart-shell">
+
+  <!-- Empty Cart -->
+  <div *ngIf="cartService.items().length === 0" class="page-card">
+    <span class="page-eyebrow">Your Cart</span>
+    <h1 class="page-title">Cart is empty</h1>
+    <p class="page-sub">Looks like you haven't added anything yet. Head to the menu to get started.</p>
+    <a routerLink="/menu" class="page-btn">Browse Menu</a>
+  </div>
+
+  <!-- Cart Items -->
+  <div *ngIf="cartService.items().length > 0" class="cart-content">
+    <div class="cart-header">
+      <span class="page-eyebrow">Your Cart</span>
+      <h1 class="page-title">Ready to order?</h1>
+    </div>
+
+    <div class="cart-list">
+      <div class="cart-item" *ngFor="let item of cartService.items()">
+        <div class="cart-item-info">
+          <h3 class="cart-item-name">{{ item.name }}</h3>
+          <p class="cart-item-unit">${{ item.price | number:'1.2-2' }} each</p>
+        </div>
+        <div class="cart-item-actions">
+          <div class="qty-control">
+            <button class="qty-btn" (click)="decrease(item)">−</button>
+            <span class="qty-value">{{ item.quantity }}</span>
+            <button class="qty-btn" (click)="increase(item)">+</button>
+          </div>
+          <span class="cart-item-total">${{ item.price * item.quantity | number:'1.2-2' }}</span>
+          <button class="remove-btn" (click)="remove(item)">Remove</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="cart-summary">
+      <div class="cart-total-row">
+        <span>Total</span>
+        <span class="cart-total">${{ cartService.total() | number:'1.2-2' }}</span>
+      </div>
+      <div class="cart-actions">
+        <button class="btn-ghost" (click)="clear()">Clear Cart</button>
+        <button class="page-btn" (click)="placeOrder()">Place Order</button>
+      </div>
+    </div>
+  </div>
+
+</section>
