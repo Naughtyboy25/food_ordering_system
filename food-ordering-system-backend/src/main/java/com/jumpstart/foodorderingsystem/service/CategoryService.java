@@ -26,4 +26,13 @@ public interface CategoryService {
      * @return the created CategoryDto, including its generated ID
      */
     CategoryDto addCategory(CategoryDto dto);
+
+    /**
+     * Updates an existing category.
+     * @param id the ID of the category to update
+     * @param dto the updated category data
+     * @return the updated CategoryDto
+     * @throws com.jumpstart.foodorderingsystem.exception.CategoryNotFoundException if not found
+     */
+    CategoryDto updateCategory(Long id, CategoryDto dto);
 }
