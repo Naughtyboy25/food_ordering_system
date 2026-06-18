@@ -225,7 +225,69 @@
   to { transform: rotate(360deg); }
 }
 
+/* ── Items panel ──────────────────────────────── */
+.items-panel {
+  background: #252523;
+  border: 1px solid #333330;
+  border-radius: 16px;
+  padding: 1.6rem;
+  margin-top: 1.6rem;
+  animation: cardIn 0.35s ease both;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.2rem;
+}
+
+.panel-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #FAF7F2;
+  margin: 0;
+}
+
+.item-form {
+  display: grid;
+  grid-template-columns: 1.5fr 2fr 0.7fr auto;
+  gap: 1rem;
+  align-items: end;
+  margin-bottom: 1.5rem;
+}
+
+.item-form .form-row {
+  margin-bottom: 0;
+}
+
+.item-form .form-actions {
+  margin-bottom: 0.25rem;
+}
+
+.price-cell {
+  font-variant-numeric: tabular-nums;
+  color: #F5A623;
+  font-weight: 600;
+}
+
+.selected-row {
+  background: rgba(245, 166, 35, 0.08);
+}
+
+.btn-icon.items:hover {
+  color: #4CAF50;
+  border-color: #4CAF50;
+}
+
 /* ── Responsive ───────────────────────────────── */
+@media (max-width: 800px) {
+  .item-form {
+    grid-template-columns: 1fr;
+    align-items: stretch;
+  }
+}
+
 @media (max-width: 600px) {
   .categories-page {
     padding: 2rem 1rem 3rem;

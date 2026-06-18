@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CategoryService } from '../../services/category.service';
+import { MenuService } from '../../services/menu.service';
 import { Category } from '../../models/category.model';
+import { MenuItem } from '../../models/menu-item.model';
 
 @Component({
   selector: 'app-categories',
@@ -22,7 +24,18 @@ export class CategoriesComponent implements OnInit {
   isEditing = false;
   formError = '';
 
-  constructor(private categoryService: CategoryService) {}
+  // Menu item management
+  selectedCategory: Category | null = null;
+  menuItems: MenuItem[] = [];
+  itemsLoading = false;
+  itemError = '';
+  itemSuccess = '';
+  itemForm: MenuItem = { id: 0, name: '', category: '', description: '', price: 0 };
+
+  constructor(
+    private categoryService: CategoryService,
+    private menuService: MenuService
+  ) {}
 
   ngOnInit(): void {
     this.loadCategories();
@@ -89,6 +102,10 @@ export class CategoriesComponent implements OnInit {
     this.categoryService.deleteCategory(id).subscribe({
       next: () => {
         this.successMessage = `Category "${name}" deleted.`;
+        if (this.selectedCategory?.id === id) {
+          this.selectedCategory = null;
+          this.menuItems = [];
+        }
         this.loadCategories();
       },
       error: (err) => this.handleError(err)
@@ -108,6 +125,76 @@ export class CategoriesComponent implements OnInit {
   clearMessages(): void {
     this.successMessage = '';
     this.errorMessage = '';
+    this.itemSuccess = '';
+    this.itemError = '';
+  }
+
+  // ── Menu item management ─────────────────────────
+
+  selectCategory(category: Category): void {
+    this.selectedCategory = category;
+    this.itemForm = { id: 0, name: '', category: category.name, description: '', price: 0 };
+    this.itemError = '';
+    this.itemSuccess = '';
+    this.loadMenuItems(category.name);
+  }
+
+  loadMenuItems(categoryName: string): void {
+    this.itemsLoading = true;
+    this.menuService.getItemsByCategory(categoryName).subscribe({
+      next: (data) => {
+        this.menuItems = data;
+        this.itemsLoading = false;
+      },
+      error: (err) => {
+        this.itemError = 'Could not load menu items.';
+        this.itemsLoading = false;
+        console.error(err);
+      }
+    });
+  }
+
+  onItemSubmit(form: any): void {
+    if (form.invalid || !this.selectedCategory) {
+      this.itemError = 'Please provide a valid name, description, and price.';
+      return;
+    }
+
+    this.itemError = '';
+    const item: MenuItem = {
+      id: 0,
+      name: this.itemForm.name.trim(),
+      category: this.selectedCategory.name,
+      description: this.itemForm.description.trim(),
+      price: this.itemForm.price
+    };
+
+    this.menuService.createItem(item).subscribe({
+      next: () => {
+        this.itemSuccess = `Item "${item.name}" added.`;
+        this.itemForm.name = '';
+        this.itemForm.description = '';
+        this.itemForm.price = 0;
+        this.loadMenuItems(this.selectedCategory!.name);
+      },
+      error: (err) => this.handleItemError(err)
+    });
+  }
+
+  deleteMenuItem(id: number, name: string): void {
+    if (!confirm(`Delete item "${name}"?`)) {
+      return;
+    }
+
+    this.menuService.deleteItem(id).subscribe({
+      next: () => {
+        this.itemSuccess = `Item "${name}" deleted.`;
+        if (this.selectedCategory) {
+          this.loadMenuItems(this.selectedCategory.name);
+        }
+      },
+      error: (err) => this.handleItemError(err)
+    });
   }
 
   private handleError(err: any): void {
@@ -117,6 +204,18 @@ export class CategoriesComponent implements OnInit {
       this.formError = err.error.message;
     } else {
       this.formError = 'Something went wrong. Please try again.';
+    }
+    console.error(err);
+  }
+
+  private handleItemError(err: any): void {
+    if (err.error?.fieldErrors) {
+      const messages = Object.values(err.error.fieldErrors).join(', ');
+      this.itemError = messages;
+    } else if (err.error?.message) {
+      this.itemError = err.error.message;
+    } else {
+      this.itemError = 'Something went wrong. Please try again.';
     }
     console.error(err);
   }

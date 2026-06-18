@@ -16,10 +16,19 @@
       <ng-template #allItemsTitle>
         <h2>All Items</h2>
       </ng-template>
-      <p class="items-count">{{ items().length }} item{{ items().length === 1 ? '' : 's' }} available</p>
+      <p *ngIf="!isLoading()" class="items-count">{{ items().length }} item{{ items().length === 1 ? '' : 's' }} available</p>
     </div>
 
-    <div *ngIf="items().length > 0" class="item-grid">
+    <div *ngIf="isLoading()" class="state">
+      <div class="spinner"></div>
+      <p>Loading menu items…</p>
+    </div>
+
+    <div *ngIf="!isLoading() && errorMessage()" class="state state-error">
+      <p>{{ errorMessage() }}</p>
+    </div>
+
+    <div *ngIf="!isLoading() && items().length > 0" class="item-grid">
       <div class="item-card" *ngFor="let item of items()">
         <div class="item-info">
           <h3 class="item-name">{{ item.name }}</h3>
@@ -32,7 +41,7 @@
       </div>
     </div>
 
-    <div *ngIf="items().length === 0" class="empty-items">
+    <div *ngIf="!isLoading() && items().length === 0 && !errorMessage()" class="empty-items">
       <p>No items available for this category yet.</p>
       <a routerLink="/menu" class="page-btn">Show All Items</a>
     </div>

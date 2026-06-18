@@ -14,7 +14,7 @@
     {{ errorMessage }}
   </div>
 
-  <!-- Add / Edit form -->
+  <!-- Add / Edit category form -->
   <div class="form-card">
     <h2 class="form-title">{{ isEditing ? 'Edit Category' : 'Add Category' }}</h2>
     <form #categoryForm="ngForm" (ngSubmit)="onSubmit(categoryForm)">
@@ -55,7 +55,7 @@
     <p>No categories found.</p>
   </div>
 
-  <!-- List -->
+  <!-- Category List -->
   <div *ngIf="!isLoading && categories.length > 0" class="table-card">
     <table class="category-table">
       <thead>
@@ -66,12 +66,76 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let cat of categories">
+        <tr *ngFor="let cat of categories" [class.selected-row]="selectedCategory?.id === cat.id">
           <td class="id-cell">{{ cat.id }}</td>
           <td class="name-cell">{{ cat.name }}</td>
           <td class="actions">
+            <button class="btn-icon items" (click)="selectCategory(cat)" title="Manage items">🍽</button>
             <button class="btn-icon edit" (click)="editCategory(cat)" title="Edit">✎</button>
             <button class="btn-icon delete" (click)="deleteCategory(cat.id, cat.name)" title="Delete">🗑</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Menu items for selected category -->
+  <div *ngIf="selectedCategory" class="items-panel">
+    <div class="panel-header">
+      <h2 class="panel-title">Items in "{{ selectedCategory.name }}"</h2>
+      <button class="btn btn-ghost" (click)="selectedCategory = null">Close</button>
+    </div>
+
+    <div *ngIf="itemSuccess" class="alert alert-success" (click)="clearMessages()">{{ itemSuccess }}</div>
+    <div *ngIf="itemError" class="alert alert-error" (click)="clearMessages()">{{ itemError }}</div>
+
+    <!-- Add item form -->
+    <form #itemFormRef="ngForm" (ngSubmit)="onItemSubmit(itemFormRef)" class="item-form">
+      <div class="form-row">
+        <label for="itemName">Item name</label>
+        <input id="itemName" name="name" type="text" [(ngModel)]="itemForm.name" required minlength="2" maxlength="100" class="form-input" placeholder="e.g. Cheeseburger" />
+      </div>
+      <div class="form-row">
+        <label for="itemDescription">Description</label>
+        <input id="itemDescription" name="description" type="text" [(ngModel)]="itemForm.description" maxlength="255" class="form-input" placeholder="Short description" />
+      </div>
+      <div class="form-row narrow">
+        <label for="itemPrice">Price</label>
+        <input id="itemPrice" name="price" type="number" [(ngModel)]="itemForm.price" required min="0.01" step="0.01" class="form-input" placeholder="0.00" />
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Add Item</button>
+      </div>
+    </form>
+
+    <!-- Items list -->
+    <div *ngIf="itemsLoading" class="state">
+      <div class="spinner"></div>
+      <p>Loading items…</p>
+    </div>
+
+    <div *ngIf="!itemsLoading && menuItems.length === 0" class="state state-empty">
+      <p>No items in this category yet.</p>
+    </div>
+
+    <table *ngIf="!itemsLoading && menuItems.length > 0" class="category-table item-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th class="actions">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of menuItems">
+          <td class="id-cell">{{ item.id }}</td>
+          <td class="name-cell">{{ item.name }}</td>
+          <td>{{ item.description }}</td>
+          <td class="price-cell">${{ item.price | number:'1.2-2' }}</td>
+          <td class="actions">
+            <button class="btn-icon delete" (click)="deleteMenuItem(item.id, item.name)" title="Delete">🗑</button>
           </td>
         </tr>
       </tbody>
