@@ -32,6 +32,9 @@ spring.h2.console.path=/h2-console
 # update: Hibernate will create/alter tables to match entities automatically
 spring.jpa.hibernate.ddl-auto=create-drop
 
+# Wait until Hibernate has created the schema before running data.sql
+spring.jpa.defer-datasource-initialization=true
+
 # Print SQL statements to the console — useful for debugging
 spring.jpa.show-sql=true
 spring.jpa.properties.hibernate.format_sql=true
