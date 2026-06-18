@@ -2,6 +2,7 @@ package com.jumpstart.foodorderingsystem.controller;
 
 import com.jumpstart.foodorderingsystem.dto.CategoryDto;
 import com.jumpstart.foodorderingsystem.service.CategoryService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -49,7 +50,7 @@ public class CategoryController {
      * Creates a new category and returns 201 Created.
      */
     @PostMapping
-    public ResponseEntity<CategoryDto> createCategory(@RequestBody CategoryDto dto) {
+    public ResponseEntity<CategoryDto> createCategory(@RequestBody @Valid CategoryDto dto) {
         CategoryDto created = categoryService.addCategory(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
