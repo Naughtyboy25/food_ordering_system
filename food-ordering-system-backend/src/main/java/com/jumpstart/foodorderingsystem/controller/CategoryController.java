@@ -11,42 +11,20 @@ import java.util.List;
 /**
  * CategoryController is the REST API layer for category operations.
  *
- * The Controller's responsibilities:
- *   1. Receive HTTP requests from the client (browser, Postman, Angular)
- *   2. Delegate the work to the Service layer
- *   3. Return the result as an HTTP response (JSON)
- *
- * The Controller should NOT contain business logic — that belongs in the Service.
- * It only routes requests and formats responses.
- *
  * @RestController = @Controller + @ResponseBody
- *   Automatically serialises return values to JSON.
- *
- * @RequestMapping("/api/category")
- *   All endpoints in this class are prefixed with /api/category.
- *
- * @RequiredArgsConstructor (Lombok) injects CategoryService via the constructor.
- * This is the recommended way to do Dependency Injection in Spring Boot.
- *
- * Data flow:  HTTP Request → Controller → Service → Repository → Database
- *             HTTP Response ← Controller ← Service ← Repository ← Database
+ * Both /api/category (current frontend) and /api/categories (RESTful plural)
+ * are supported so existing clients keep working.
  */
 @RestController
-@RequestMapping("/api/category")
+@RequestMapping({"/api/category", "/api/categories"})
 @RequiredArgsConstructor
 public class CategoryController {
 
     private final CategoryService categoryService;
 
     /**
-     * GET /api/category
+     * GET /api/categories
      * Returns all food categories as a JSON array.
-     *
-     * Example response:
-     * [
-     *   { "id": 1, "name": "Fast Food" },
-     *   { "id": 2, "name": "Pizza" }
-     * ]
      */
     @GetMapping
     public ResponseEntity<List<CategoryDto>> getAllCategories() {
@@ -55,7 +33,7 @@ public class CategoryController {
     }
 
     /**
-     * GET /api/category/{id}
+     * GET /api/categories/{id}
      * Returns a single category by its ID.
      * Returns 404 if the category does not exist.
      */
