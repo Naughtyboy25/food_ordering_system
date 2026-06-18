@@ -35,4 +35,11 @@ public interface CategoryService {
      * @throws com.jumpstart.foodorderingsystem.exception.CategoryNotFoundException if not found
      */
     CategoryDto updateCategory(Long id, CategoryDto dto);
+
+    /**
+     * Deletes a category by its ID.
+     * @param id the ID of the category to delete
+     * @throws com.jumpstart.foodorderingsystem.exception.CategoryNotFoundException if not found
+     */
+    void deleteCategory(Long id);
 }
