@@ -54,11 +54,6 @@ export class CategoryListComponent implements OnInit {
     return this.categoryMeta[name] || this.defaultMeta;
   }
 
-  onExplore(category: Category, event: Event): void {
-    event.stopPropagation();
-    this.router.navigate(['/menu'], { queryParams: { category: category.name } });
-  }
-
   onCardClick(category: Category): void {
     this.router.navigate(['/menu'], { queryParams: { category: category.name } });
   }

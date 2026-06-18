@@ -1,0 +1,243 @@
+/* ── Categories management page ───────────────── */
+.categories-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 5rem;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #F5A623;
+  margin-bottom: 0.5rem;
+}
+
+.page-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 700;
+  color: #FAF7F2;
+  margin: 0 0 0.4rem;
+}
+
+.page-sub {
+  font-size: 0.95rem;
+  color: #8A8480;
+  margin: 0;
+}
+
+/* ── Alerts ───────────────────────────────────── */
+.alert {
+  padding: 0.85rem 1rem;
+  border-radius: 10px;
+  margin-bottom: 1.2rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.alert-success {
+  background: rgba(76, 175, 80, 0.12);
+  color: #81C784;
+  border: 1px solid rgba(76, 175, 80, 0.25);
+}
+
+.alert-error {
+  background: rgba(229, 115, 115, 0.12);
+  color: #E57373;
+  border: 1px solid rgba(229, 115, 115, 0.25);
+}
+
+/* ── Form card ────────────────────────────────── */
+.form-card,
+.table-card {
+  background: #252523;
+  border: 1px solid #333330;
+  border-radius: 16px;
+  padding: 1.6rem;
+  margin-bottom: 1.6rem;
+}
+
+.form-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #FAF7F2;
+  margin: 0 0 1.2rem;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.form-row label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #A09B97;
+}
+
+.form-input {
+  background: #1C1C1E;
+  border: 1px solid #3A3A37;
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  color: #FAF7F2;
+  font-size: 0.95rem;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.form-input:focus {
+  border-color: #F5A623;
+  box-shadow: 0 0 0 2px rgba(245, 166, 35, 0.15);
+  outline: none;
+}
+
+.form-error {
+  color: #E57373;
+  font-size: 0.85rem;
+  margin: -0.4rem 0 1rem;
+}
+
+.form-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.btn {
+  padding: 0.65rem 1.2rem;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: none;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  background: #F5A623;
+  color: #1C1C1E;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: #A09B97;
+  border: 1px solid #3A3A37;
+}
+
+/* ── Table ────────────────────────────────────── */
+.category-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.category-table th,
+.category-table td {
+  padding: 0.9rem 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #333330;
+}
+
+.category-table th {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8A8480;
+}
+
+.id-cell {
+  color: #8A8480;
+  font-variant-numeric: tabular-nums;
+  width: 60px;
+}
+
+.name-cell {
+  color: #FAF7F2;
+  font-weight: 500;
+}
+
+.actions {
+  text-align: right;
+  white-space: nowrap;
+  width: 100px;
+}
+
+.btn-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid #3A3A37;
+  background: transparent;
+  color: #A09B97;
+  margin-left: 0.4rem;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.btn-icon:hover {
+  background: #333330;
+}
+
+.btn-icon.edit:hover {
+  color: #F5A623;
+  border-color: #F5A623;
+}
+
+.btn-icon.delete:hover {
+  color: #E57373;
+  border-color: #E57373;
+}
+
+/* ── States ───────────────────────────────────── */
+.state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+  color: #8A8480;
+  gap: 1rem;
+}
+
+.spinner {
+  width: 34px;
+  height: 34px;
+  border: 3px solid #333;
+  border-top-color: #F5A623;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Responsive ───────────────────────────────── */
+@media (max-width: 600px) {
+  .categories-page {
+    padding: 2rem 1rem 3rem;
+  }
+
+  .form-card,
+  .table-card {
+    padding: 1.2rem;
+  }
+
+  .category-table th,
+  .category-table td {
+    padding: 0.75rem 0.5rem;
+  }
+}

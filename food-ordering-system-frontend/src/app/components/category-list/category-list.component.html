@@ -44,11 +44,8 @@
       <div class="card-glow"></div>
       <div class="card-icon">{{ getMeta(cat.name).icon }}</div>
       <div class="card-body">
-        <span class="card-id">No. {{ cat.id }}</span>
         <h3 class="card-name">{{ cat.name }}</h3>
-        <p class="card-desc">{{ getMeta(cat.name).description }}</p>
       </div>
-      <button class="card-cta" (click)="onExplore(cat, $event)">Explore →</button>
     </div>
   </div>
 
@@ -56,7 +53,7 @@
   <div *ngIf="!isLoading && !errorMessage && categories.length > 0" class="api-badge">
     <span class="badge-dot"></span>
     {{ categories.length }} categories loaded from
-    <code>GET /api/category</code>
+    <code>GET /api/categories</code>
   </div>
 
 </section>

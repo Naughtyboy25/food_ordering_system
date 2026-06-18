@@ -1,0 +1,81 @@
+<section class="categories-page">
+
+  <div class="page-header">
+    <span class="eyebrow">Manage</span>
+    <h1 class="page-title">Categories</h1>
+    <p class="page-sub">Create, edit, or remove food categories.</p>
+  </div>
+
+  <!-- Status messages -->
+  <div *ngIf="successMessage" class="alert alert-success" (click)="clearMessages()">
+    {{ successMessage }}
+  </div>
+  <div *ngIf="errorMessage" class="alert alert-error" (click)="clearMessages()">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Add / Edit form -->
+  <div class="form-card">
+    <h2 class="form-title">{{ isEditing ? 'Edit Category' : 'Add Category' }}</h2>
+    <form #categoryForm="ngForm" (ngSubmit)="onSubmit(categoryForm)">
+      <div class="form-row">
+        <label for="categoryName">Category name</label>
+        <input
+          id="categoryName"
+          name="name"
+          type="text"
+          [(ngModel)]="formCategory.name"
+          required
+          minlength="2"
+          maxlength="50"
+          placeholder="e.g. Sushi"
+          class="form-input"
+        />
+      </div>
+      <p *ngIf="formError" class="form-error">{{ formError }}</p>
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">
+          {{ isEditing ? 'Update' : 'Create' }}
+        </button>
+        <button *ngIf="isEditing" type="button" class="btn btn-ghost" (click)="cancelEdit()">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Loading -->
+  <div *ngIf="isLoading" class="state">
+    <div class="spinner"></div>
+    <p>Loading categories…</p>
+  </div>
+
+  <!-- Empty -->
+  <div *ngIf="!isLoading && categories.length === 0" class="state state-empty">
+    <p>No categories found.</p>
+  </div>
+
+  <!-- List -->
+  <div *ngIf="!isLoading && categories.length > 0" class="table-card">
+    <table class="category-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th class="actions">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cat of categories">
+          <td class="id-cell">{{ cat.id }}</td>
+          <td class="name-cell">{{ cat.name }}</td>
+          <td class="actions">
+            <button class="btn-icon edit" (click)="editCategory(cat)" title="Edit">✎</button>
+            <button class="btn-icon delete" (click)="deleteCategory(cat.id, cat.name)" title="Delete">🗑</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</section>
