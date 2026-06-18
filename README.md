@@ -31,11 +31,24 @@ JumpStart Eats lets users browse food categories, view menu items, add them to a
 
 3. Open `http://localhost:4200`.
 
+## Endpoints
+
+| Method | URL                       | Body         |
+|--------|---------------------------|--------------|
+| POST   | /api/categories           | { "name" }   |
+| GET    | /api/categories           | -            |
+| GET    | /api/categories/{id}      | -            |
+| PUT    | /api/categories/{id}      | { "name" }   |
+| DELETE | /api/categories/{id}      | -            |
+
+> The controller also accepts `/api/category/*` so the existing Angular frontend keeps working.
+
 ## Documentation
 
 - [User Guide](./docs/USER_GUIDE.md) — how the app works and how to use it
 - [Developer Guide](./docs/DEVELOPER_GUIDE.md) — how to set up and run the project
 - [Research](./docs/RESEARCH.md) — Spring Boot, Angular, MySQL, and how they integrate
+- [Day 01 Research](./RESEARCH-DAY-01.md) — CRUD, HTTP methods, validation, and DTOs
 
 ## Repository structure
 
