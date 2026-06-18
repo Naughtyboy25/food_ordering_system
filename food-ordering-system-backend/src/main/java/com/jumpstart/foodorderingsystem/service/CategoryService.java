@@ -19,4 +19,11 @@ public interface CategoryService {
      * @throws com.jumpstart.foodorderingsystem.exception.CategoryNotFoundException if not found
      */
     CategoryDto getCategoryById(Long id);
+
+    /**
+     * Creates a new category.
+     * @param dto the category data from the request
+     * @return the created CategoryDto, including its generated ID
+     */
+    CategoryDto addCategory(CategoryDto dto);
 }

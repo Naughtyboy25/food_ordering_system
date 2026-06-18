@@ -3,6 +3,7 @@ package com.jumpstart.foodorderingsystem.controller;
 import com.jumpstart.foodorderingsystem.dto.CategoryDto;
 import com.jumpstart.foodorderingsystem.service.CategoryService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,5 +42,15 @@ public class CategoryController {
     public ResponseEntity<CategoryDto> getCategoryById(@PathVariable Long id) {
         CategoryDto category = categoryService.getCategoryById(id);
         return ResponseEntity.ok(category);
+    }
+
+    /**
+     * POST /api/categories
+     * Creates a new category and returns 201 Created.
+     */
+    @PostMapping
+    public ResponseEntity<CategoryDto> createCategory(@RequestBody CategoryDto dto) {
+        CategoryDto created = categoryService.addCategory(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
 }

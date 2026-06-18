@@ -36,7 +36,18 @@ public class CategoryServiceImpl implements CategoryService {
         return mapToDto(category);
     }
 
+    @Override
+    public CategoryDto addCategory(CategoryDto dto) {
+        Category category = mapToEntity(dto);
+        Category savedCategory = categoryRepository.save(category);
+        return mapToDto(savedCategory);
+    }
+
     private CategoryDto mapToDto(Category category) {
         return new CategoryDto(category.getId(), category.getName());
+    }
+
+    private Category mapToEntity(CategoryDto dto) {
+        return new Category(dto.getId(), dto.getName());
     }
 }
